@@ -29,7 +29,7 @@ public class SecurityConfig {
                         // public endpoints (optional)
                         .requestMatchers("/products/view/**").permitAll()
                         // only ADMIN can manage products
-                        .requestMatchers("/products/**").hasRole("ADMIN")
+                        .requestMatchers("/products/**").hasAuthority("ADMIN")
                         .requestMatchers("/actuator/**").permitAll()
                         .anyRequest().authenticated()
                 )

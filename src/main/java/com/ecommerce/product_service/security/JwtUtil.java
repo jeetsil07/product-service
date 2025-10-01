@@ -32,6 +32,12 @@ public class JwtUtil {
     public List<SimpleGrantedAuthority> extractRoles(String token) {
         Claims claims = extractAllClaims(token);
 
+        // Single "role" claim
+        String singleRole = claims.get("role", String.class);
+        if (singleRole != null) {
+            return Collections.singletonList(new SimpleGrantedAuthority(singleRole));
+        }
+
         // Suppose roles are stored like: { "roles": ["ROLE_ADMIN", "ROLE_USER"] }
         List<String> roles = claims.get("roles", List.class);
 
